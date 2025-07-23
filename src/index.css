@@ -1,0 +1,82 @@
+/* ✅ 기본 배경 및 폰트 */
+body {
+  background-color: #0f172a;
+  color: #f1f5f9;
+  font-family: 'Noto Sans KR', sans-serif;
+  margin: 0;
+  padding: 0;
+}
+
+/* ✅ 링크 */
+a {
+  color: #22d3ee;
+  text-decoration: none;
+}
+a:hover {
+  text-decoration: underline;
+}
+
+/* ✅ 버튼 */
+button {
+  background-color: #22d3ee;
+  color: #0f172a;
+  border: none;
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+button:hover {
+  background-color: #14b8a6;
+}
+
+/* ✅ 입력 필드 */
+input, select, textarea {
+  background-color: #1e293b;
+  color: #f1f5f9;
+  border: 1px solid #334155;
+  padding: 0.5rem;
+  border-radius: 4px;
+}
+
+/* ✅ 섹션 제목 */
+h1, h2, h3, h4, h5 {
+  color: #f1f5f9;
+}
+
+/* ✅ 카테고리 섹션 */
+.category-section {
+  margin-bottom: 3rem;
+  padding: 0 2rem;
+}
+.category-section h2 {
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+  color: #22d3ee;
+}
+.category-section .card-list {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+}
+
+/* ✅ 영화 카드 */
+.movie-card {
+  background-color: #1e293b;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: transform 0.2s;
+}
+.movie-card:hover {
+  transform: scale(1.05);
+}
+.movie-card img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.movie-card-title {
+  padding: 0.5rem;
+  font-size: 0.9rem;
+  color: #f1f5f9;
+}
