@@ -1,0 +1,25 @@
+{
+  "name": "streaming-app",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "vite --port 5176 --open",
+    "build": "vite build",
+    "preview": "vite preview --port 5176"
+  },
+  "dependencies": {
+    "firebase": "^10.14.1",
+    "hls.js": "^1.6.11",
+    "query-string": "^9.2.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-helmet-async": "^2.0.5",
+    "react-icons": "^5.5.0",
+    "react-router-dom": "^6.14.1"
+  },
+  "devDependencies": {
+    "@vitejs/plugin-react": "^4.0.0",
+    "rollup-plugin-visualizer": "^6.0.3",
+    "vite": "^4.4.0"
+  }
+}
