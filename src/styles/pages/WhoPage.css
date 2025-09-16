@@ -1,0 +1,52 @@
+.who-container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  width: 100%;
+  background-color: #0d1117; 
+  color: #fff;
+  text-align: center;
+}
+
+.who-title {
+  font-size: 2rem;
+  margin-bottom: 2rem;
+}
+
+.profile-list {
+  display: flex;
+  gap: 2rem;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.profile-card {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.profile-card img {
+  width: 120px;
+  height: 120px;
+  border-radius: 10px;
+  border: 3px solid transparent;
+}
+
+.profile-card:hover {
+  transform: scale(1.1);
+}
+
+.profile-card:hover img {
+  border-color: #1db954; 
+}
+
+.profile-card p {
+  margin-top: 0.5rem;
+  font-size: 1rem;
+  color: #ddd;
+}
