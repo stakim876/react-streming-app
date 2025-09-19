@@ -1,0 +1,51 @@
+.category-page {
+  padding: 1rem 2rem;
+}
+
+.page-title {
+  color: #00ffc8;
+  margin-bottom: 1rem;
+}
+
+.category-list-container {
+  position: relative;
+}
+
+.category-list {
+  display: flex;
+  gap: 1rem;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none; 
+}
+
+.category-list::-webkit-scrollbar {
+  display: none; 
+}
+
+.scroll-btn {
+  position: absolute;
+  top: 40%;
+  transform: translateY(-50%);
+  background: rgba(0, 0, 0, 0.6);
+  border: none;
+  color: #00ffc8;
+  font-size: 2rem;
+  cursor: pointer;
+  padding: 0.5rem;
+  border-radius: 50%;
+  z-index: 2;
+  transition: background 0.3s;
+}
+
+.scroll-btn:hover {
+  background: rgba(0, 0, 0, 0.9);
+}
+
+.scroll-left {
+  left: -10px;
+}
+
+.scroll-right {
+  right: -10px;
+}
