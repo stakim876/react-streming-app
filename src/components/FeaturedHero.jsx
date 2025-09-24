@@ -1,11 +1,12 @@
 import { useEffect, useState } from "react";
 import { fetchMovies, fetchMovieDetail } from "@/services/tmdb";
+import { FaPowerOff } from "react-icons/fa";
 import "./FeaturedHero.css";
 
 export default function FeaturedHero() {
   const [movie, setMovie] = useState(null);
   const [trailerKey, setTrailerKey] = useState(null);
-  const [isVisible, setIsVisible] = useState(true);
+  const [visible, setVisible] = useState(true);
 
   useEffect(() => {
     async function loadFeatured() {
@@ -39,7 +40,7 @@ export default function FeaturedHero() {
           ) ||
           detail.videos?.results.find(
             (v) =>
-              (v.type === "Trailer" || v.type === "Teaser" || v.type === "Clip") &&
+              ["Trailer", "Teaser", "Clip"].includes(v.type) &&
               v.site === "YouTube"
           );
 
@@ -51,41 +52,49 @@ export default function FeaturedHero() {
     loadFeatured();
   }, []);
 
-  if (!movie || !isVisible) return null;
+  if (!visible) {
+    return (
+      <div className="hero-show-btn-wrapper">
+        <button className="hero-show-btn" onClick={() => setVisible(true)}>
+          <FaPowerOff />
+        </button>
+      </div>
+    );
+  }
 
   return (
     <section className="featured-hero">
-      <button className="hero-close-btn" onClick={() => setIsVisible(false)}>
-        ✕
+      <button
+        className="hero-toggle-btn"
+        onClick={() => setVisible(false)}
+        title="배너 끄기"
+      >
+        <FaPowerOff />
       </button>
 
-      {trailerKey ? (
-        <div className="hero-video-wrapper">
+      <div className="hero-video-wrapper">
+        {trailerKey ? (
           <iframe
             src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${trailerKey}`}
             title="Featured Trailer"
             className="hero-video"
-            allow="autoplay; encrypted-media"
-          ></iframe>
-        </div>
-      ) : (
-        <img
-          src={`https://image.tmdb.org/t/p/original${
-            movie.backdrop_path || movie.poster_path
-          }`}
-          alt={movie.title}
-          className="hero-image"
-        />
-      )}
-
-      <div className="hero-overlay">
-        <h1 className="hero-title">{movie.title}</h1>
-        <p className="hero-overview">{movie.overview}</p>
-        <div className="hero-buttons">
-          <button className="play-btn">▶ 재생</button>
-          <button className="info-btn">ℹ 상세정보</button>
-        </div>
+            allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
+            allowFullScreen
+          />
+        ) : (
+          movie && (
+            <img
+              src={`https://image.tmdb.org/t/p/original${
+                movie.backdrop_path || movie.poster_path
+              }`}
+              alt={movie.title}
+              className="hero-video"
+            />
+          )
+        )}
       </div>
+
+      <button className="play-btn">▶ 재생</button>
     </section>
   );
 }

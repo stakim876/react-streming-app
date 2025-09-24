@@ -64,6 +64,12 @@ export default function Header() {
               </div>
             )}
           </div>
+
+          {user && (
+            <Link to="/favorites" className="nav-item">
+              내 찜 목록
+            </Link>
+          )}
         </nav>
 
         <form className="search-bar" onSubmit={handleSearch}>

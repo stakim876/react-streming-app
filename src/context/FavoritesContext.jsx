@@ -14,7 +14,12 @@ export function FavoritesProvider({ children }) {
 
     const fetchFavorites = async () => {
       const snapshot = await getDocs(collection(db, "users", user.uid, "favorites"));
-      setFavorites(snapshot.docs.map((doc) => ({ id: parseInt(doc.id), ...doc.data() })));
+      setFavorites(
+        snapshot.docs.map((doc) => ({
+          id: parseInt(doc.id),
+          ...doc.data(),
+        }))
+      );
     };
 
     fetchFavorites();
@@ -31,14 +36,14 @@ export function FavoritesProvider({ children }) {
       setFavorites(favorites.filter((f) => f.id !== movie.id));
     } else {
       await setDoc(ref, {
-        id: movie.id,
-        title: movie.title || movie.name,
-        poster_path: movie.poster_path,
-        backdrop_path: movie.backdrop_path,
-        overview: movie.overview,
-        vote_average: movie.vote_average,
+        tmdbId: movie.id.toString(), 
+        title: movie.title || movie.name, 
+        poster_path: movie.poster_path || null,
+        backdrop_path: movie.backdrop_path || null,
+        overview: movie.overview || "",
+        vote_average: movie.vote_average || 0,
       });
-      setFavorites([...favorites, movie]);
+      setFavorites([...favorites, { id: movie.id, ...movie }]);
     }
   };
 

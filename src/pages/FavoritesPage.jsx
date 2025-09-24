@@ -21,7 +21,7 @@ export default function FavoritesPage() {
       {favorites.length > 0 ? (
         <div className="favorites-list">
           {favorites.map((movie) => (
-            <MovieCard key={movie.id} movie={movie} />
+            <MovieCard key={movie.tmdbId} movie={movie} /> 
           ))}
         </div>
       ) : (

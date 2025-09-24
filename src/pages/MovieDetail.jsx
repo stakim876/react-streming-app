@@ -30,7 +30,9 @@ export default function MovieDetail() {
         setMovie(data);
 
         const trailerData = data.videos?.results.find(
-          (v) => v.type === "Trailer" && v.site === "YouTube"
+          (v) =>
+            ["Trailer", "Teaser", "Clip"].includes(v.type) &&
+            v.site === "YouTube"
         );
         setTrailer(trailerData?.key || null);
 
@@ -41,6 +43,8 @@ export default function MovieDetail() {
           return !item.adult && !blockKeywords.some((kw) => t.includes(kw));
         });
         setRecommend(filteredRecommend);
+
+        console.log("videos:", data.videos?.results);
       } catch (err) {
         console.error("영화 상세 불러오기 실패:", err);
       }
@@ -97,20 +101,22 @@ export default function MovieDetail() {
         </div>
       )}
 
-      {trailer && (
-        <div className="detail-trailer">
-          <h2>예고편</h2>
-          <div className="trailer-wrapper">
+      <div className="detail-trailer">
+        <h2>예고편</h2>
+        <div className="trailer-wrapper">
+          {trailer ? (
             <iframe
-              src={`https://www.youtube.com/embed/${trailer}`}
+              src={`https://www.youtube.com/embed/${trailer}?autoplay=1&mute=1&controls=1`}
               title="Trailer"
               frameBorder="0"
               allow="autoplay; encrypted-media"
               allowFullScreen
             />
-          </div>
+          ) : (
+            <p style={{ color: "#fff" }}>등록된 예고편이 없습니다.</p>
+          )}
         </div>
-      )}
+      </div>
 
       {recommend.length > 0 && (
         <div className="detail-recommend">

@@ -6,7 +6,7 @@ const bannedKeywords = [
   "porn", "porno", "xxx", "sex", "sexual", "erotic", "adult", "hardcore",
   "uncensored", "nude", "nsfw",
   "アダルト", "ポルノ", "セックス", "ヌード", "エロ", "エッチ",
-  "色情", "成人", "裸", "性爱", "黄片"
+  "色情", "成人", "裸", "性爱", "黄片", "セクシー・オーラル 浮気な唇"
 ];
 
 const bannedGenreIds = [10749, 867];
