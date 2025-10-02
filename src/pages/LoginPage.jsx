@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase"; 
+import { auth } from "@/lib/firebase";
+import "./LoginPage.css"; 
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -14,10 +15,7 @@ export default function LoginPage() {
     setError(null);
 
     try {
-      // ✅ Firebase 로그인
       await signInWithEmailAndPassword(auth, email, password);
-
-      // ✅ 로그인 성공 시 홈으로 이동
       navigate("/home");
     } catch (err) {
       console.error("로그인 실패:", err);
@@ -27,25 +25,33 @@ export default function LoginPage() {
 
   return (
     <div className="login-container">
-      <h1>로그인</h1>
-      <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="이메일"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
-        <input
-          type="password"
-          placeholder="비밀번호"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
-        <button type="submit">로그인</button>
-        {error && <p className="error">{error}</p>}
-      </form>
+      <div className="login-box">
+        <h1 className="login-title">로그인</h1>
+        <form onSubmit={handleLogin}>
+          {error && <p className="error">{error}</p>}
+          <input
+            type="email"
+            placeholder="이메일"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+          <input
+            type="password"
+            placeholder="비밀번호"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+          <button type="submit" className="login-btn">
+            로그인
+          </button>
+        </form>
+        <p className="signup-link">
+          계정이 없으신가요?{" "}
+          <Link to="/signup">회원가입</Link>
+        </p>
+      </div>
     </div>
   );
 }

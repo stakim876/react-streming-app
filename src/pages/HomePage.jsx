@@ -2,6 +2,7 @@ import "./HomePage.css";
 import FeaturedHero from "@/components/FeaturedHero";
 import CategoryGrid from "@/components/CategoryGrid";
 import CategoryCards from "@/components/CategoryCards";
+import "./LoginPage.css"; 
 
 export default function HomePage() {
   return (
