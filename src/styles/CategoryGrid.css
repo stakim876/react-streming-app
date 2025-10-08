@@ -1,73 +1,57 @@
 .category-grid {
-  position: relative;
-  margin: 30px 0;
-  padding: 0 50px;
+  margin-bottom: 2.5rem;
+  padding: 0 1.5rem;
 }
 
 .category-title {
-  font-size: 1.6rem;
-  font-weight: bold;
-  margin-bottom: 16px;
-  color: #fff;
-  padding-left: 8px;
-  border-left: 4px solid #1f80e0; 
+  color: #2dd4bf;
+  margin-bottom: 1rem;
+  font-size: 1.4rem;
+  text-shadow: 0 0 6px rgba(0, 224, 255, 0.5);
 }
 
 .scroll-wrapper {
-  position: relative;
+  overflow-x: auto;
+  overflow-y: hidden;
+  white-space: nowrap;
+  scroll-behavior: smooth;
+  padding-bottom: 10px;
 }
 
 .movie-row {
   display: flex;
-  gap: 14px;
-  overflow-x: auto;
-  scroll-behavior: smooth;
-  scrollbar-width: none;
+  gap: 1rem;
+  flex-wrap: nowrap; 
+  width: max-content;
 }
 
-.movie-row::-webkit-scrollbar {
-  display: none;
-}
-
-.scroll-btn {
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-  background: rgba(0, 0, 0, 0.6);
-  border: none;
-  color: #fff;
-  font-size: 2.2rem;
-  cursor: pointer;
-  z-index: 20;
-  padding: 8px 14px;
-  border-radius: 50%;
-  transition: background 0.2s, transform 0.2s;
-}
-
-.scroll-btn:hover {
-  background: rgba(255, 255, 255, 0.25);
-  transform: scale(1.1);
-}
-
-.scroll-btn.left {
-  left: 5px;
-}
-
-.scroll-btn.right {
-  right: 5px;
-}
-
-.movie-card {
+.movie-row > * {
   flex: 0 0 auto;
-  width: 170px;
-  border-radius: 10px;
-  overflow: hidden;
-  background: #111;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  width: 180px;
 }
 
-.movie-card:hover {
-  transform: scale(1.08);
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+.scroll-wrapper::-webkit-scrollbar {
+  height: 8px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-track {
+  background: #0b0f1f;
+  border-radius: 10px;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #00e0ff, #00bcd4);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.scroll-wrapper::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #33f0ff, #00d0ff);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
+}
+
+@media (max-width: 768px) {
+  .movie-row > * {
+    width: 140px;
+  }
 }

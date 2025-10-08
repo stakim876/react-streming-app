@@ -1,5 +1,7 @@
 .category-cards-container {
   position: relative;
+  width: 100%;
+  overflow-y: hidden; 
 }
 
 .category-cards {
@@ -10,11 +12,27 @@
   padding: 0 2rem;
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: none;
+  scroll-behavior: smooth;
 }
 
 .category-cards::-webkit-scrollbar {
-  display: none;
+  height: 8px;
+}
+
+.category-cards::-webkit-scrollbar-track {
+  background: rgba(13, 27, 42, 0.7);
+  border-radius: 10px;
+}
+
+.category-cards::-webkit-scrollbar-thumb {
+  background: linear-gradient(90deg, #00e0ff, #00bcd4);
+  border-radius: 10px;
+  transition: all 0.3s ease;
+}
+
+.category-cards::-webkit-scrollbar-thumb:hover {
+  background: linear-gradient(90deg, #2dd4bf, #1e90ff);
+  box-shadow: 0 0 8px rgba(0, 255, 255, 0.6);
 }
 
 .category-card {
@@ -25,7 +43,7 @@
   border-radius: 12px;
   overflow: hidden;
   cursor: pointer;
-  transition: 0.3s;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
   box-shadow: 0 0 8px rgba(0, 255, 200, 0.4);
 }
 
@@ -39,6 +57,7 @@
   height: 100%;
   object-fit: cover;
   display: block;
+  border-radius: 12px;
 }
 
 .card-center-overlay {
@@ -56,3 +75,10 @@
   font-size: 1.1rem;
   font-weight: bold;
 }
+
+@media (max-width: 768px) {
+  .category-card {
+    min-width: 160px;
+    height: 90px;
+  }
+} 

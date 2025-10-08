@@ -49,7 +49,6 @@ export default function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
-
               <Route
                 element={
                   <MainLayout
@@ -58,19 +57,54 @@ export default function App() {
                   />
                 }
               >
-                <Route path="/" element={<HomePage />} />
-                <Route path="/search" element={<SearchPage />} />
-                <Route path="/movie/:id" element={<MovieDetail />} />
+                <Route
+                  path="/"
+                  element={
+                    <PrivateRoute>
+                      <HomePage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/search"
+                  element={
+                    <PrivateRoute>
+                      <SearchPage />
+                    </PrivateRoute>
+                  }
+                />
+                <Route
+                  path="/movie/:id"
+                  element={
+                    <PrivateRoute>
+                      <MovieDetail />
+                    </PrivateRoute>
+                  }
+                />
                 <Route
                   path="/category/:type/:category"
-                  element={<CategoryPage />}
+                  element={
+                    <PrivateRoute>
+                      <CategoryPage />
+                    </PrivateRoute>
+                  }
                 />
                 <Route
                   path="/category/genre/:genreId"
-                  element={<CategoryPage />}
+                  element={
+                    <PrivateRoute>
+                      <CategoryPage />
+                    </PrivateRoute>
+                  }
                 />
-                <Route path="/discover" element={<DiscoverPage />} />
-
+                <Route
+                  path="/discover"
+                  element={
+                    <PrivateRoute>
+                      <DiscoverPage />
+                    </PrivateRoute>
+                  }
+                />
                 <Route
                   path="/who"
                   element={

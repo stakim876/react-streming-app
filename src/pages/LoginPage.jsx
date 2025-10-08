@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
 import { auth } from "@/lib/firebase";
-import "./LoginPage.css"; 
+import "./LoginPage.css";
 
 export default function LoginPage() {
   const [email, setEmail] = useState("");
@@ -16,7 +16,7 @@ export default function LoginPage() {
 
     try {
       await signInWithEmailAndPassword(auth, email, password);
-      navigate("/home");
+      navigate("/who");
     } catch (err) {
       console.error("로그인 실패:", err);
       setError("로그인에 실패했습니다. 이메일과 비밀번호를 확인하세요.");
