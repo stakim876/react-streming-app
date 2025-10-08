@@ -3,13 +3,14 @@ const BASE_URL = "https://api.themoviedb.org/3";
 
 const bannedKeywords = [
   "성인", "에로", "포르노", "야동", "섹스", "19금", "야함", "노출",
+  "불륜", "유혹", "음란", "동침", "은밀한", "위험한 사촌", "두 집 살림",
   "porn", "porno", "xxx", "sex", "sexual", "erotic", "adult", "hardcore",
   "uncensored", "nude", "nsfw",
   "アダルト", "ポルノ", "セックス", "ヌード", "エロ", "エッチ",
-  "色情", "成人", "裸", "性爱", "黄片", "セクシー・オーラル 浮気な唇"
+  "色情", "成人", "裸", "性爱", "黄片"
 ];
 
-const bannedGenreIds = [10749, 867];
+const bannedGenreIds = [867];
 
 function isSafeMovie(m) {
   if (!m) return false;
@@ -20,12 +21,16 @@ function isSafeMovie(m) {
     return false;
   }
 
-  const text = `${m.title || ""} ${m.name || ""} ${m.overview || ""}`.toLowerCase();
-  if (bannedKeywords.some((word) => text.includes(word.toLowerCase()))) {
-    return false;
-  }
+  const text = `
+    ${m.title || ""}
+    ${m.name || ""}
+    ${m.original_title || ""}
+    ${m.original_name || ""}
+    ${m.overview || ""}
+    ${m.original_overview || ""}
+  `.toLowerCase();
 
-  return true;
+  return !bannedKeywords.some((word) => text.includes(word.toLowerCase()));
 }
 
 export async function fetchMovies(endpoint) {
@@ -38,9 +43,7 @@ export async function fetchMovies(endpoint) {
     if (!res.ok) throw new Error(`TMDb API 호출 실패: ${res.status}`);
 
     const data = await res.json();
-
     data.results = (data.results || []).filter(isSafeMovie);
-
     return data;
   } catch (err) {
     console.error("fetchMovies error:", err);
@@ -55,7 +58,8 @@ export async function fetchMovieDetail(id, type = "movie") {
   if (!response.ok) {
     throw new Error("상세 정보를 불러올 수 없습니다.");
   }
+
   const data = await response.json();
-  if (!isSafeMovie(data)) throw new Error("성인 컨텐츠 차단됨");
+  if (!isSafeMovie(data)) throw new Error("성인 콘텐츠 차단됨");
   return data;
 }
