@@ -43,12 +43,14 @@ export default function App() {
       <Helmet>
         <title>MoviePlay | 감성 무비</title>
       </Helmet>
+
       <AuthProvider>
         <MovieProvider>
           <FavoritesProvider>
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
+
               <Route
                 element={
                   <MainLayout
@@ -73,6 +75,7 @@ export default function App() {
                     </PrivateRoute>
                   }
                 />
+
                 <Route
                   path="/movie/:id"
                   element={
@@ -81,6 +84,16 @@ export default function App() {
                     </PrivateRoute>
                   }
                 />
+
+                <Route
+                  path="/tv/:id"
+                  element={
+                    <PrivateRoute>
+                      <MovieDetail />
+                    </PrivateRoute>
+                  }
+                />
+
                 <Route
                   path="/category/:type/:category"
                   element={

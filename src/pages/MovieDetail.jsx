@@ -36,15 +36,17 @@ export default function MovieDetail() {
         );
         setTrailer(trailerData?.key || null);
 
-        setCast(data.credits?.cast?.slice(0, 10) || []);
+        const castData =
+          data.credits?.cast
+            ?.filter((c) => c.name && c.character)
+            ?.slice(0, 12) || [];
+        setCast(castData);
 
         const filteredRecommend = (data.recommendations?.results || []).filter((item) => {
           const t = `${item.title || item.name || ""} ${item.overview || ""}`.toLowerCase();
           return !item.adult && !blockKeywords.some((kw) => t.includes(kw));
         });
         setRecommend(filteredRecommend);
-
-        console.log("videos:", data.videos?.results);
       } catch (err) {
         console.error("영화 상세 불러오기 실패:", err);
       }
@@ -54,6 +56,10 @@ export default function MovieDetail() {
 
   if (!movie) return <p style={{ color: "#fff" }}>로딩 중...</p>;
 
+  const fallbackPoster = "https://via.placeholder.com/300x450.png?text=No+Image";
+  const fallbackCast = "https://placehold.co/120x160?text=No+Photo";
+  const fallbackRec = "https://placehold.co/140x210?text=No+Image";
+
   return (
     <div className="movie-detail">
       <div className="detail-header">
@@ -61,7 +67,7 @@ export default function MovieDetail() {
           src={
             movie.poster_path
               ? `https://image.tmdb.org/t/p/w500${movie.poster_path}`
-              : "https://via.placeholder.com/300x450.png?text=No+Image"
+              : fallbackPoster
           }
           alt={movie.title}
           className="detail-poster"
@@ -69,13 +75,13 @@ export default function MovieDetail() {
         <div className="detail-info">
           <h1>{movie.title}</h1>
           <LikeButton movie={movie} />
-          <p>{movie.overview}</p>
+          <p className="overview">{movie.overview || "줄거리가 없습니다."}</p>
           <p>
-            <strong>개봉일:</strong> {movie.release_date}
+            <strong>개봉일:</strong> {movie.release_date || "정보 없음"}
           </p>
           <p>
             <strong>장르:</strong>{" "}
-            {movie.genres?.map((g) => g.name).join(", ")}
+            {movie.genres?.map((g) => g.name).join(", ") || "정보 없음"}
           </p>
         </div>
       </div>
@@ -90,11 +96,12 @@ export default function MovieDetail() {
                   src={
                     c.profile_path
                       ? `https://image.tmdb.org/t/p/w200${c.profile_path}`
-                      : "https://via.placeholder.com/100x150.png?text=No+Photo"
+                      : fallbackCast
                   }
                   alt={c.name}
                 />
-                <p>{c.name}</p>
+                <p className="actor-name">{c.name}</p>
+                <p className="character">{c.character}</p>
               </div>
             ))}
           </div>
@@ -113,7 +120,7 @@ export default function MovieDetail() {
               allowFullScreen
             />
           ) : (
-            <p style={{ color: "#fff" }}>등록된 예고편이 없습니다.</p>
+            <p className="no-trailer">등록된 예고편이 없습니다.</p>
           )}
         </div>
       </div>
@@ -128,11 +135,11 @@ export default function MovieDetail() {
                   src={
                     r.poster_path
                       ? `https://image.tmdb.org/t/p/w200${r.poster_path}`
-                      : "https://via.placeholder.com/200x300.png?text=No+Image"
+                      : fallbackRec
                   }
                   alt={r.title}
                 />
-                <p>{r.title}</p>
+                <p className="rec-title">{r.title || "제목 없음"}</p>
               </div>
             ))}
           </div>

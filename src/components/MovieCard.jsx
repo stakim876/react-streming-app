@@ -11,10 +11,12 @@ export default function MovieCard({ movie }) {
       ? `https://image.tmdb.org/t/p/w500${movie.poster_path || movie.backdrop_path}`
       : fallbackImage;
 
+  const mediaType = movie.media_type || (movie.first_air_date ? "tv" : "movie");
+
   return (
     <div
       className="movie-card"
-      onClick={() => navigate(`/movie/${movie.id}`)}
+      onClick={() => navigate(`/${mediaType}/${movie.id}`)}
     >
       <img
         src={imageUrl}

@@ -144,3 +144,18 @@
   background: #1db954;
   color: white;
 }
+
+.dropdown-section {
+  display: block;
+  font-size: 0.9rem;
+  font-weight: bold;
+  color: #00e0ff;
+  margin: 6px 14px 3px;
+  opacity: 0.9;
+}
+
+.dropdown-menu hr {
+  border: 0;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin: 6px 0;
+}

@@ -11,18 +11,17 @@ export default function Header() {
   const { user, logout } = useAuth();
 
   useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
+    const handleScroll = () => setScrolled(window.scrollY > 50);
     window.addEventListener("scroll", handleScroll);
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
   const handleSearch = (e) => {
     e.preventDefault();
-    if (query.trim()) {
-      navigate(`/home?query=${encodeURIComponent(query.trim())}`);
-    }
+    const trimmed = query.trim();
+    if (!trimmed) return;
+    navigate(`/search?query=${encodeURIComponent(trimmed)}`);
+    setQuery("");
   };
 
   const handleAuth = async () => {
@@ -54,13 +53,41 @@ export default function Header() {
             <span className="dropdown-toggle">카테고리 ▾</span>
             {dropdownOpen && (
               <div className="dropdown-menu">
+                <span className="dropdown-section">🎬 영화</span>
                 <Link to="/category/movie/popular">인기 영화</Link>
                 <Link to="/category/movie/now_playing">현재 상영작</Link>
                 <Link to="/category/movie/top_rated">평점 높은 영화</Link>
                 <Link to="/category/movie/upcoming">개봉 예정작</Link>
+
+                <hr />
+
+                <span className="dropdown-section">📺 드라마</span>
                 <Link to="/category/tv/popular">인기 드라마</Link>
                 <Link to="/category/tv/on_the_air">방영 중 드라마</Link>
                 <Link to="/category/tv/top_rated">평점 높은 드라마</Link>
+
+                <hr />
+
+                <span className="dropdown-section">🎭 장르별</span>
+                <Link to="/category/genre/28">액션</Link>
+                <Link to="/category/genre/12">모험</Link>
+                <Link to="/category/genre/16">애니메이션</Link>
+                <Link to="/category/genre/35">코미디</Link>
+                <Link to="/category/genre/80">범죄</Link>
+                <Link to="/category/genre/99">다큐멘터리</Link>
+                <Link to="/category/genre/18">드라마</Link>
+                <Link to="/category/genre/10751">가족</Link>
+                <Link to="/category/genre/14">판타지</Link>
+                <Link to="/category/genre/36">역사</Link>
+                <Link to="/category/genre/27">공포</Link>
+                <Link to="/category/genre/10402">음악</Link>
+                <Link to="/category/genre/9648">미스터리</Link>
+                <Link to="/category/genre/10749">로맨스</Link>
+                <Link to="/category/genre/878">SF</Link>
+                <Link to="/category/genre/10770">TV 영화</Link>
+                <Link to="/category/genre/53">스릴러</Link>
+                <Link to="/category/genre/10752">전쟁</Link>
+                <Link to="/category/genre/37">서부</Link>
               </div>
             )}
           </div>
