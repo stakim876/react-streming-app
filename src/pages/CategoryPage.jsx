@@ -1,4 +1,4 @@
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovies } from "../services/tmdb";
 import MovieCard from "@/components/MovieCard";
@@ -8,9 +8,6 @@ export default function CategoryPage() {
   const { type, category, genreId } = useParams();
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
-  const [showLeft, setShowLeft] = useState(false);
-  const [showRight, setShowRight] = useState(false);
-  const listRef = useRef(null);
 
   useEffect(() => {
     async function loadMovies() {
@@ -53,37 +50,10 @@ export default function CategoryPage() {
 
   const pageTitle =
     type && category
-      ? `${type === "movie" ? "영화" : "드라마"} - ${categoryMap[category] || category}`
+      ? `${type === "movie" ? "영화" : "드라마"} - ${
+          categoryMap[category] || category
+        }`
       : "장르별 영화";
-
-  const updateButtons = () => {
-    if (!listRef.current) return;
-    const { scrollLeft, scrollWidth, clientWidth } = listRef.current;
-    setShowLeft(scrollLeft > 0);
-    setShowRight(scrollLeft + clientWidth < scrollWidth);
-  };
-
-  useEffect(() => {
-    updateButtons();
-    const list = listRef.current;
-    if (list) {
-      list.addEventListener("scroll", updateButtons);
-    }
-    return () => {
-      if (list) list.removeEventListener("scroll", updateButtons);
-    };
-  }, [movies]);
-
-  const scroll = (direction) => {
-    if (listRef.current) {
-      const { scrollLeft, clientWidth } = listRef.current;
-      const scrollAmount = direction === "left" ? -clientWidth : clientWidth;
-      listRef.current.scrollTo({
-        left: scrollLeft + scrollAmount,
-        behavior: "smooth",
-      });
-    }
-  };
 
   return (
     <div className="category-page">
@@ -92,22 +62,10 @@ export default function CategoryPage() {
       ) : movies.length > 0 ? (
         <>
           <h2 className="page-title">{pageTitle}</h2>
-          <div className="category-list-container">
-            {showLeft && (
-              <button className="scroll-btn scroll-left" onClick={() => scroll("left")}>
-                〈
-              </button>
-            )}
-            <div className="category-list" ref={listRef}>
-              {movies.map((m) => (
-                <MovieCard key={m.id} movie={m} />
-              ))}
-            </div>
-            {showRight && (
-              <button className="scroll-btn scroll-right" onClick={() => scroll("right")}>
-                〉
-              </button>
-            )}
+          <div className="movie-grid">
+            {movies.slice(0, 10).map((m) => (
+              <MovieCard key={m.id} movie={m} />
+            ))}
           </div>
         </>
       ) : (
