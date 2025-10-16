@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { fetchMovies, fetchMovieDetail } from "@/services/tmdb";
 import { FaPowerOff } from "react-icons/fa";
 import "./FeaturedHero.css";
@@ -7,6 +7,8 @@ export default function FeaturedHero() {
   const [movie, setMovie] = useState(null);
   const [trailerKey, setTrailerKey] = useState(null);
   const [visible, setVisible] = useState(true);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const iframeRef = useRef(null);
 
   useEffect(() => {
     async function loadFeatured() {
@@ -52,6 +54,16 @@ export default function FeaturedHero() {
     loadFeatured();
   }, []);
 
+  const togglePlay = () => {
+    if (!iframeRef.current) return;
+    const iframe = iframeRef.current;
+    const message = isPlaying
+      ? '{"event":"command","func":"pauseVideo","args":""}'
+      : '{"event":"command","func":"playVideo","args":""}';
+    iframe.contentWindow.postMessage(message, "*");
+    setIsPlaying(!isPlaying);
+  };
+
   if (!visible) {
     return (
       <div className="hero-show-btn-wrapper">
@@ -75,7 +87,8 @@ export default function FeaturedHero() {
       <div className="hero-video-wrapper">
         {trailerKey ? (
           <iframe
-            src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${trailerKey}`}
+            ref={iframeRef}
+            src={`https://www.youtube.com/embed/${trailerKey}?autoplay=1&mute=1&controls=0&loop=1&playlist=${trailerKey}&enablejsapi=1`}
             title="Featured Trailer"
             className="hero-video"
             allow="autoplay; fullscreen; encrypted-media; picture-in-picture"
@@ -94,7 +107,11 @@ export default function FeaturedHero() {
         )}
       </div>
 
-      <button className="play-btn">▶ 재생</button>
+      {trailerKey && (
+        <button className="play-btn" onClick={togglePlay}>
+          {isPlaying ? "⏸ 멈춤" : "▶ 재생"}
+        </button>
+      )}
     </section>
   );
 }

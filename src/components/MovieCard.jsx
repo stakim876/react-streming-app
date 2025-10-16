@@ -24,7 +24,6 @@ export default function MovieCard({ movie }) {
         className="movie-poster"
       />
       <div className="overlay">
-        <h3 className="movie-title">{movie.title || movie.name}</h3>
         {movie.vote_average > 0 && (
           <p className="movie-rating">⭐ {movie.vote_average.toFixed(1)}</p>
         )}

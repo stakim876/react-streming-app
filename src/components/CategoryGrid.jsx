@@ -14,16 +14,26 @@ export default function CategoryGrid({ title, category, type, genreId }) {
         let url = "";
 
         if (category && type) {
-          url = `/${type}/${category}`;
+          url = `/${type}/${category}?language=ko-KR&page=1&include_adult=false`;
         } else if (genreId) {
-          url = `/discover/movie?with_genres=${genreId}`;
+          url = `/discover/movie?with_genres=${genreId}&language=ko-KR&page=1&include_adult=false`;
         }
 
         if (!url) return;
 
         setLoading(true);
         const res = await fetchMovies(url);
-        setMovies((res.results || []).slice(0, 20));
+
+        const filtered = (res.results || []).filter(
+          (m) =>
+            !m.adult &&
+            m.poster_path &&
+            !/adult|porn|sex|섹스|에로|성인|야동|av|야사|爆乳|エロ|レイプ/i.test(
+              `${m.title || ""} ${m.original_title || ""} ${m.overview || ""}`
+            )
+        );
+
+        setMovies(filtered.slice(0, 20));
       } catch (err) {
         console.error("CategoryGrid fetch error:", err);
       } finally {
@@ -35,8 +45,7 @@ export default function CategoryGrid({ title, category, type, genreId }) {
 
   return (
     <div className="category-grid">
-      <h2 className="category-title">{title}</h2>
-
+     
       {loading ? (
         <p className="loading-text">불러오는 중...</p>
       ) : movies.length > 0 ? (

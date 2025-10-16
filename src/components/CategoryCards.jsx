@@ -8,7 +8,7 @@ export default function CategoryCards() {
     {
       id: "originals",
       name: "MoviePlay Originals",
-      image: "/assets/originals.png",
+      image: "/assets/MoviePlayOriginals.png",
     },
     {
       id: "popular-movies",
@@ -60,9 +60,7 @@ export default function CategoryCards() {
             onClick={() => handleClick(cat)}
           >
             <img src={cat.image} alt={cat.name} />
-            <div className="card-center-overlay">
-              <span>{cat.name}</span>
-            </div>
+           {/* <div className="card-title">{cat.name}</div> */}
           </div>
         ))}
       </div>
