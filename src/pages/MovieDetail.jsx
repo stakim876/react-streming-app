@@ -9,6 +9,7 @@ export default function MovieDetail() {
   const [cast, setCast] = useState([]);
   const [trailer, setTrailer] = useState(null);
   const [recommend, setRecommend] = useState([]);
+  const [similar, setSimilar] = useState([]); 
 
   useEffect(() => {
     const fetchData = async () => {
@@ -20,7 +21,17 @@ export default function MovieDetail() {
         );
         const data = await res.json();
 
-        const blockKeywords = ["sex", "adult", "porn", "에로", "야동", "섹스", "19금", "av", "노출"];
+        const blockKeywords = [
+          "sex",
+          "adult",
+          "porn",
+          "에로",
+          "야동",
+          "섹스",
+          "19금",
+          "av",
+          "노출",
+        ];
         const text = `${data.title || ""} ${data.overview || ""}`.toLowerCase();
         if (data.adult || blockKeywords.some((kw) => text.includes(kw))) {
           setMovie(null);
@@ -42,11 +53,27 @@ export default function MovieDetail() {
             ?.slice(0, 12) || [];
         setCast(castData);
 
-        const filteredRecommend = (data.recommendations?.results || []).filter((item) => {
-          const t = `${item.title || item.name || ""} ${item.overview || ""}`.toLowerCase();
+        const filteredRecommend = (data.recommendations?.results || []).filter(
+          (item) => {
+            const t = `${item.title || item.name || ""} ${
+              item.overview || ""
+            }`.toLowerCase();
+            return !item.adult && !blockKeywords.some((kw) => t.includes(kw));
+          }
+        );
+        setRecommend(filteredRecommend);
+
+        const similarRes = await fetch(
+          `https://api.themoviedb.org/3/movie/${id}/similar?api_key=${apiKey}&language=ko-KR&page=1`
+        );
+        const similarData = await similarRes.json();
+        const filteredSimilar = (similarData.results || []).filter((item) => {
+          const t = `${item.title || item.name || ""} ${
+            item.overview || ""
+          }`.toLowerCase();
           return !item.adult && !blockKeywords.some((kw) => t.includes(kw));
         });
-        setRecommend(filteredRecommend);
+        setSimilar(filteredSimilar);
       } catch (err) {
         console.error("영화 상세 불러오기 실패:", err);
       }
@@ -56,7 +83,8 @@ export default function MovieDetail() {
 
   if (!movie) return <p style={{ color: "#fff" }}>로딩 중...</p>;
 
-  const fallbackPoster = "https://via.placeholder.com/300x450.png?text=No+Image";
+  const fallbackPoster =
+    "https://via.placeholder.com/300x450.png?text=No+Image";
   const fallbackCast = "https://placehold.co/120x160?text=No+Photo";
   const fallbackRec = "https://placehold.co/140x210?text=No+Image";
 
@@ -140,6 +168,27 @@ export default function MovieDetail() {
                   alt={r.title}
                 />
                 <p className="rec-title">{r.title || "제목 없음"}</p>
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {similar.length > 0 && (
+        <div className="detail-similar">
+          <h2>이 영화와 비슷한 콘텐츠</h2>
+          <div className="similar-list">
+            {similar.map((s) => (
+              <div key={s.id} className="similar-card">
+                <img
+                  src={
+                    s.poster_path
+                      ? `https://image.tmdb.org/t/p/w200${s.poster_path}`
+                      : fallbackRec
+                  }
+                  alt={s.title}
+                />
+                <p className="similar-title">{s.title || "제목 없음"}</p>
               </div>
             ))}
           </div>
