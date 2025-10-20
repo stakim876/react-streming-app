@@ -45,7 +45,8 @@ export default function CategoryGrid({ title, category, type, genreId }) {
 
   return (
     <div className="category-grid">
-     
+      {title && <h2 className="category-title">{title}</h2>}
+
       {loading ? (
         <p className="loading-text">불러오는 중...</p>
       ) : movies.length > 0 ? (

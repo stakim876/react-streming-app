@@ -17,7 +17,11 @@ export default function WhoPage() {
 
   return (
     <div className="who-container">
-      <h1 className="who-title">누구세요?</h1>
+      <h1 className="who-title">
+        <span className="highlight">MoviePlay</span>에 오신 걸 환영합니다 🎬<br />
+        <span>시청할 프로필을 선택하세요</span>
+      </h1>
+
       <div className="profile-list">
         {profiles.map((profile) => (
           <div
@@ -29,6 +33,11 @@ export default function WhoPage() {
             <p>{profile.name}</p>
           </div>
         ))}
+
+        <div className="profile-card add-card" onClick={() => alert("프로필 추가 예정 기능")}>
+          <span className="add-icon">＋</span>
+          <p>프로필 추가</p>
+        </div>
       </div>
     </div>
   );

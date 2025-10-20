@@ -4,14 +4,18 @@ import CategoryGrid from "@/components/CategoryGrid";
 import CategoryCards from "@/components/CategoryCards";
 import TodayTop10 from "@/components/TodayTop10";
 import "./LoginPage.css"; 
+import TodayRecommend from "@/components/TodayRecommend";
+import WatchAgain from "@/components/WatchAgain";
 
 export default function HomePage() {
   return (
     <div className="home-page">
       <FeaturedHero />
-      <CategoryCards />
 
+      <CategoryCards />
       <TodayTop10 />
+      <WatchAgain />
+      <TodayRecommend />
 
       <CategoryGrid title="인기 영화" category="popular" type="movie" />
       <CategoryGrid title="현재 상영작" category="now_playing" type="movie" />

@@ -45,6 +45,10 @@ export default function Header() {
         </div>
 
         <nav className="nav-links">
+          <Link to="/home" className="nav-item">
+            홈
+          </Link>
+
           <div
             className="dropdown"
             onMouseEnter={() => setDropdownOpen(true)}
@@ -95,6 +99,18 @@ export default function Header() {
           {user && (
             <Link to="/favorites" className="nav-item">
               내 찜 목록
+            </Link>
+          )}
+
+          {user && (
+            <Link to="/profile" className="nav-item">
+              프로필
+            </Link>
+          )}
+
+          {user?.role === "admin" && (
+            <Link to="/admin" className="nav-item">
+              관리자
             </Link>
           )}
         </nav>

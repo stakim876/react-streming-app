@@ -52,6 +52,14 @@ export default function App() {
               <Route path="/signup" element={<SignUpPage />} />
 
               <Route
+                path="/who"
+                element={
+                  <PrivateRoute>
+                    <WhoPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
                 element={
                   <MainLayout
                     sidebarOpen={sidebarOpen}
@@ -75,7 +83,6 @@ export default function App() {
                     </PrivateRoute>
                   }
                 />
-
                 <Route
                   path="/movie/:id"
                   element={
@@ -84,7 +91,6 @@ export default function App() {
                     </PrivateRoute>
                   }
                 />
-
                 <Route
                   path="/tv/:id"
                   element={
@@ -93,7 +99,6 @@ export default function App() {
                     </PrivateRoute>
                   }
                 />
-
                 <Route
                   path="/category/:type/:category"
                   element={
@@ -115,14 +120,6 @@ export default function App() {
                   element={
                     <PrivateRoute>
                       <DiscoverPage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
-                  path="/who"
-                  element={
-                    <PrivateRoute>
-                      <WhoPage />
                     </PrivateRoute>
                   }
                 />
