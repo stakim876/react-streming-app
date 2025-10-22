@@ -1,29 +1,35 @@
+import { useNavigate } from "react-router-dom";
 import "./ProfilePage.css";
 
-const profiles = [
-  { id: 1, name: "내 프로필", img: "/avatars/mickey.png" },
-  { id: 2, name: "가족", img: "/avatars/rapunzel.png" },
-];
+export default function ProfilePage() {
+  const navigate = useNavigate();
 
-export default function ProfileSelect() {
+  const profile = {
+    name: "내 프로필",
+    img: "/assets/mickey.png",
+  };
+
+  const handleEdit = () => {
+    alert("프로필 수정 기능 예정");
+  };
+
   return (
-    <div className="profile-select">
-      <h2>프로필 선택</h2>
-      <div className="profile-grid">
-        {profiles.map((p) => (
-          <div key={p.id} className="profile-card">
-            <div className="avatar-wrapper">
-              <img src={p.img} alt={p.name} className="avatar" />
-              <button className="edit-btn">✏️</button>
-            </div>
-            <p className="profile-name">{p.name}</p>
-          </div>
-        ))}
-        <div className="profile-card add-profile">
-          <div className="avatar-wrapper">
-            <span className="plus">+</span>
-          </div>
-          <p className="profile-name">프로필 추가</p>
+    <div className="profile-page-container">
+      <h1 className="profile-title">내 프로필</h1>
+
+      <div className="profile-box-large">
+        <div className="avatar-circle">
+          <img src={profile.img} alt={profile.name} className="avatar-img" />
+          <button className="edit-btn" onClick={handleEdit}>
+            ✏️
+          </button>
+        </div>
+        <p className="profile-name">{profile.name}</p>
+
+        <div className="profile-actions">
+          <button className="home-btn" onClick={() => navigate("/")}>
+            홈으로 돌아가기
+          </button>
         </div>
       </div>
     </div>

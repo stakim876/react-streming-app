@@ -88,6 +88,26 @@
   transform: scale(1.05);
 }
 
+.manage-btn {
+  margin-top: 60px;
+  background: transparent;
+  border: 1px solid #555;
+  color: #ccc;
+  padding: 10px 28px;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 1rem;
+  letter-spacing: 0.5px;
+  transition: all 0.25s ease;
+}
+
+.manage-btn:hover {
+  border-color: #00e0ff;
+  color: #00e0ff;
+  box-shadow: 0 0 10px rgba(0, 224, 255, 0.4);
+  transform: scale(1.05);
+}
+
 @media (max-width: 768px) {
   .who-title {
     font-size: 1.4rem;

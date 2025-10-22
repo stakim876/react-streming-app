@@ -5,14 +5,15 @@ export default function WhoPage() {
   const navigate = useNavigate();
 
   const profiles = [
-    { id: 1, name: "김승태", avatar: "https://i.pravatar.cc/150?img=1" },
+    { id: 1, name: "김승태", avatar:"/assets/mickey.png"},
     { id: 2, name: "가족 계정", avatar: "https://i.pravatar.cc/150?img=2" },
     { id: 3, name: "게스트", avatar: "https://i.pravatar.cc/150?img=3" },
   ];
 
   const handleProfileClick = (profile) => {
     console.log("선택된 프로필:", profile.name);
-    navigate("/home");
+    localStorage.setItem("selectedProfile", profile.name);
+    navigate("/");
   };
 
   return (
@@ -34,11 +35,18 @@ export default function WhoPage() {
           </div>
         ))}
 
-        <div className="profile-card add-card" onClick={() => alert("프로필 추가 예정 기능")}>
+        <div
+          className="profile-card add-card"
+          onClick={() => alert("프로필 추가 예정 기능")}
+          >
           <span className="add-icon">＋</span>
           <p>프로필 추가</p>
         </div>
       </div>
+
+      <button className="manage-btn" onClick={() => navigate("/profile")}>
+        프로필 관리
+      </button>
     </div>
   );
 }

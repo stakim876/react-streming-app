@@ -50,12 +50,19 @@ export default function App() {
             <Routes>
               <Route path="/login" element={<LoginPage />} />
               <Route path="/signup" element={<SignUpPage />} />
-
               <Route
                 path="/who"
                 element={
                   <PrivateRoute>
                     <WhoPage />
+                  </PrivateRoute>
+                }
+              />
+              <Route
+                path="/profile"
+                element={
+                  <PrivateRoute>
+                    <ProfilePage />
                   </PrivateRoute>
                 }
               />
@@ -124,14 +131,6 @@ export default function App() {
                   }
                 />
                 <Route
-                  path="/profile"
-                  element={
-                    <PrivateRoute>
-                      <ProfilePage />
-                    </PrivateRoute>
-                  }
-                />
-                <Route
                   path="/favorites"
                   element={
                     <PrivateRoute>
@@ -148,7 +147,6 @@ export default function App() {
                   }
                 />
               </Route>
-
               <Route path="*" element={<Navigate to="/" />} />
             </Routes>
           </FavoritesProvider>

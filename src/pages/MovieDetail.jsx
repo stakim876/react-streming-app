@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LikeButton from "@/components/LikeButton";
 import "./MovieDetail.css";
+import CommentsSection from "@/components/CommentsSection.jsx";
 
 export default function MovieDetail() {
   const { id } = useParams();
@@ -194,6 +195,8 @@ export default function MovieDetail() {
           </div>
         </div>
       )}
+
+      <CommentsSection movieId={movie.id} />
     </div>
   );
 }
