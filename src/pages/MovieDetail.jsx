@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import LikeButton from "@/components/LikeButton";
+import TMDBImage from "@/components/TMDBImage"; 
 import "./MovieDetail.css";
 import CommentsSection from "@/components/CommentsSection.jsx";
 
@@ -10,7 +11,7 @@ export default function MovieDetail() {
   const [cast, setCast] = useState([]);
   const [trailer, setTrailer] = useState(null);
   const [recommend, setRecommend] = useState([]);
-  const [similar, setSimilar] = useState([]); 
+  const [similar, setSimilar] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,15 +24,9 @@ export default function MovieDetail() {
         const data = await res.json();
 
         const blockKeywords = [
-          "sex",
-          "adult",
-          "porn",
-          "에로",
-          "야동",
-          "섹스",
-          "19금",
-          "av",
-          "노출",
+          "porn", "pornographic", "xvideo", "xhamster", "zwinger", "fetish", "hardcore",
+          "nude", "erotic", "explicit sex", "adult video", "pornstar",
+          "야동", "에로", "성인", "음란", "포르노", "19금", "노골적",
         ];
         const text = `${data.title || ""} ${data.overview || ""}`.toLowerCase();
         if (data.adult || blockKeywords.some((kw) => text.includes(kw))) {
@@ -86,7 +81,6 @@ export default function MovieDetail() {
 
   const fallbackPoster =
     "https://via.placeholder.com/300x450.png?text=No+Image";
-  const fallbackCast = "https://placehold.co/120x160?text=No+Photo";
   const fallbackRec = "https://placehold.co/140x210?text=No+Image";
 
   return (
@@ -121,13 +115,10 @@ export default function MovieDetail() {
           <div className="cast-list">
             {cast.map((c) => (
               <div key={c.cast_id || c.credit_id} className="cast-card">
-                <img
-                  src={
-                    c.profile_path
-                      ? `https://image.tmdb.org/t/p/w200${c.profile_path}`
-                      : fallbackCast
-                  }
+                <TMDBImage
+                  path={c.profile_path}
                   alt={c.name}
+                  size="w200"
                 />
                 <p className="actor-name">{c.name}</p>
                 <p className="character">{c.character}</p>
@@ -196,7 +187,7 @@ export default function MovieDetail() {
         </div>
       )}
 
-      <CommentsSection movieId={movie.id} />
+      {movie?.id && <CommentsSection movieId={String(movie.id)} />}
     </div>
   );
 }

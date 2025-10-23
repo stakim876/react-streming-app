@@ -8,6 +8,28 @@ export default function CategoryGrid({ title, category, type, genreId }) {
   const [loading, setLoading] = useState(true);
   const rowRef = useRef(null);
 
+  // ✅ 안전 콘텐츠 필터 함수 (한글 + 영문 확장)
+  function isSafeContent(item) {
+    const text = `${item.title || ""} ${item.original_title || ""} ${
+      item.overview || ""
+    }`.toLowerCase();
+
+    return (
+      !item.adult &&
+      item.poster_path && // 포스터 없는 영화 제외
+      ![
+        // ⚠️ 영어 키워드
+        "porn", "pornographic", "erotic", "fetish", "hardcore",
+        "sex", "sexual", "nude", "naked", "xvideo", "xhamster",
+        "zwinger", "escort", "adult video", "strip", "lust",
+        // ⚠️ 한국어 키워드
+        "야동", "야사", "에로", "성인", "노출", "19금", "음란", "포르노", "섹스", "불륜",
+        // ⚠️ 일본어 키워드
+        "エロ", "レイプ", "アダルト", "爆乳", "セックス",
+      ].some((kw) => text.includes(kw))
+    );
+  }
+
   useEffect(() => {
     async function loadMovies() {
       try {
@@ -24,14 +46,8 @@ export default function CategoryGrid({ title, category, type, genreId }) {
         setLoading(true);
         const res = await fetchMovies(url);
 
-        const filtered = (res.results || []).filter(
-          (m) =>
-            !m.adult &&
-            m.poster_path &&
-            !/adult|porn|sex|섹스|에로|성인|야동|av|야사|爆乳|エロ|レイプ/i.test(
-              `${m.title || ""} ${m.original_title || ""} ${m.overview || ""}`
-            )
-        );
+        // ✅ 강화된 필터 적용
+        const filtered = (res.results || []).filter(isSafeContent);
 
         setMovies(filtered.slice(0, 20));
       } catch (err) {
@@ -40,6 +56,7 @@ export default function CategoryGrid({ title, category, type, genreId }) {
         setLoading(false);
       }
     }
+
     loadMovies();
   }, [category, type, genreId]);
 

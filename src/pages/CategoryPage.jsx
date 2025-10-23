@@ -9,6 +9,18 @@ export default function CategoryPage() {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  function isSafeContent(item) {
+    const text = `${item.title || item.name || ""} ${item.overview || ""}`.toLowerCase();
+    return (
+      !item.adult &&
+      ![
+        "porn", "pornographic", "zwinger", "erotic", "fetish",
+        "xvideo", "xhamster", "adult video", "hardcore", "nude",
+        "야동", "에로", "성인", "노출", "19금", "음란", "포르노"
+      ].some((kw) => text.includes(kw))
+    );
+  }
+
   useEffect(() => {
     async function loadMovies() {
       try {
@@ -25,11 +37,7 @@ export default function CategoryPage() {
         setLoading(true);
         const res = await fetchMovies(url);
 
-        const filtered = (res.results || []).filter(
-          (m) =>
-            !m.adult &&
-            !/adult|porn|sex|섹스|에로|성인|19금|av/i.test(m.title || m.name || "")
-        );
+        const filtered = (res.results || []).filter(isSafeContent);
 
         setMovies(filtered);
       } catch (err) {
