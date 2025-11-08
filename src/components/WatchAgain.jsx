@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchMovies } from "@/services/tmdb";
-import "@/styles/WatchAgain.css";
+import { fetchMovies } from "@/api/tmdb";
+import "./WatchAgain.css";
 
 export default function WatchAgain() {
   const [movies, setMovies] = useState([]);

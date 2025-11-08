@@ -1,5 +1,5 @@
 import { useNavigate } from "react-router-dom";
-import "@/styles/MovieCard.css";
+import "./MovieCard.css";
 
 const fallbackImage = "https://placehold.co/300x450?text=No+Image&font=roboto";
 

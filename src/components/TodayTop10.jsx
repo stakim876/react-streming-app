@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { fetchMovies } from "@/services/tmdb";
-import "@/styles/TodayTop10.css";
+import { fetchMovies } from "@/api/tmdb";
+import "./TodayTop10.css";
 
 export default function TodayTop10() {
   const [movies, setMovies] = useState([]);

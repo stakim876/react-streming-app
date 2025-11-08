@@ -1,180 +1,213 @@
 .movie-detail {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  padding: 40px;
+  background: #141414;
   color: #fff;
-  padding: 20px;
-  background-color: #0b1622;
 }
 
 .detail-header {
   display: flex;
-  gap: 20px;
-  margin-bottom: 30px;
+  flex-wrap: wrap;
+  gap: 30px;
+  align-items: flex-start;
 }
 
 .detail-poster {
-  width: 240px;
-  border-radius: 8px;
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
+  width: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.5);
+}
+
+.detail-info {
+  flex: 1;
+  min-width: 300px;
 }
 
 .detail-info h1 {
   font-size: 2rem;
-  margin-bottom: 10px;
+  margin-bottom: 20px;
+  color: #aefcff;
+  text-shadow: 0 0 10px rgba(0, 255, 255, 0.4);
 }
 
 .overview {
+  margin-bottom: 20px;
   line-height: 1.6;
-  color: #ccc;
-  margin-bottom: 10px;
+  color: #ddd;
 }
 
 .detail-cast h2,
 .detail-trailer h2,
-.detail-recommend h2 {
-  margin: 20px 0 10px;
-  font-size: 1.4rem;
-  color: #00e0ff;
+.detail-recommend h2,
+.detail-similar h2 {
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #aefcff;
+  text-shadow: 0 0 8px #00e0ff;
+  margin-bottom: 1rem;
 }
 
 .cast-list {
   display: flex;
-  gap: 16px;
+  flex-wrap: nowrap;
+  gap: 1rem;
   overflow-x: auto;
-  padding-bottom: 10px;
-}
-.cast-list::-webkit-scrollbar {
-  height: 6px;
-}
-.cast-list::-webkit-scrollbar-thumb {
-  background: rgba(0, 255, 255, 0.4);
-  border-radius: 4px;
-}
-.cast-card {
-  flex-shrink: 0;
-  width: 120px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  padding: 6px;
-  transition: 0.3s;
-}
-.cast-card:hover {
-  transform: translateY(-5px);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.6);
-}
-.cast-card img {
-  width: 100%;
-  height: 160px;
-  object-fit: cover;
-  border-radius: 6px;
-  margin-bottom: 6px;
-}
-.actor-name {
-  font-weight: bold;
-  font-size: 0.95rem;
-}
-.character {
-  color: #bbb;
-  font-size: 0.8rem;
+  padding-bottom: 1rem;
 }
 
-.detail-trailer {
-  margin-top: 2rem;
-}
-.trailer-wrapper {
-  position: relative;
-  padding-top: 56.25%;
-}
-.detail-trailer iframe {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  border-radius: 8px;
-}
-.no-trailer {
-  color: #bbb;
+.cast-card {
+  flex: 0 0 130px;
   text-align: center;
-  padding: 1rem 0;
+  background: #1a1a1a;
+  border-radius: 10px;
+  padding: 10px;
+  transition: transform 0.3s ease;
+}
+
+.cast-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 12px rgba(0, 255, 255, 0.4);
+}
+
+.cast-card img {
+  width: 100%;
+  height: 180px;
+  border-radius: 8px;
+  object-fit: cover;
+}
+
+.actor-name {
+  font-weight: 600;
+  margin-top: 6px;
+  font-size: 0.95rem;
+}
+
+.character {
+  color: #bbb;
+  font-size: 0.85rem;
+}
+
+.trailer-wrapper {
+  margin-top: 20px;
+}
+
+.trailer-wrapper iframe {
+  width: 100%;
+  max-width: 560px;
+  height: 315px;
+  border-radius: 12px;
+}
+
+.detail-recommend {
+  margin-top: 2rem;
 }
 
 .recommend-list {
   display: flex;
-  gap: 14px;
+  gap: 1rem;
   overflow-x: auto;
-  padding-bottom: 10px;
+  padding-bottom: 1rem;
 }
+
 .recommend-card {
-  flex-shrink: 0;
-  width: 140px;
-  text-align: center;
-  background: rgba(255, 255, 255, 0.05);
-  border-radius: 8px;
-  padding: 6px;
-  transition: 0.3s;
+  flex: 0 0 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0e1a24;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
 }
+
 .recommend-card:hover {
   transform: scale(1.05);
-  box-shadow: 0 0 10px rgba(0, 255, 255, 0.5);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.4);
 }
+
 .recommend-card img {
   width: 100%;
-  border-radius: 6px;
-  margin-bottom: 6px;
+  height: 240px;
+  object-fit: cover;
 }
+
 .rec-title {
-  font-size: 0.9rem;
-}
-.comments-section {
-  margin-top: 3rem;
-   background: rgba(0, 0, 0, 0.4);
-   padding: 20px;
-   border-radius: 10px;
-   color: #e8f7ff;
-   box-shadow: 0 0 10px rgba(0, 224, 255, 0.3);
-}
-
-.comment-form textarea {
-  width: 100%;
-  min-height: 80px;
-  margin-top: 10px;
-  padding: 10px;
-  border-radius: 6px;
-  border: none;
-  background: rgba(255, 255, 255, 0.1);
   color: #fff;
-  resize: none;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  transition: color 0.3s ease;
 }
 
-.comment-form button {
-  margin-top: 10px;
-  background: #00e0ff;
-  border: none;
-  padding: 8px 16px;
-   color: #000;
-  border-radius: 4px;
-  cursor: pointer;
-  font-weight: bold;
-  transition: all 0.2s;
+.recommend-card:hover .rec-title {
+  color: #aefcff;
 }
 
-.comment-form button:hover {
-  background: #00bfff;
-  box-shadow: 0 0 10px rgba(0, 224, 255, 0.6);
+.detail-similar {
+  margin-top: 3rem;
 }
 
-.comment-item {
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  padding: 10px 0;
-}
-
-.comment-header {
+.similar-list {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
+  overflow-x: auto;
+  padding-bottom: 1rem;
 }
 
-.rating-display {
-  color: #00e0ff;
-  margin-left: 5px;
+.similar-card {
+  flex: 0 0 160px;
+  border-radius: 10px;
+  overflow: hidden;
+  background: #0e1a24;
+  box-shadow: 0 0 10px rgba(0, 255, 255, 0.2);
+  transition: transform 0.3s ease;
+  cursor: pointer;
+}
+
+.similar-card:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 18px rgba(0, 255, 255, 0.4);
+}
+
+.similar-card img {
+  width: 100%;
+  height: 240px;
+  object-fit: cover;
+}
+
+.similar-title {
+  color: #fff;
+  font-size: 0.9rem;
+  text-align: center;
+  margin: 0.5rem 0;
+  transition: color 0.3s ease;
+}
+
+.similar-card:hover .similar-title {
+  color: #aefcff;
+}
+
+/* ✅ 반응형 */
+@media (max-width: 768px) {
+  .movie-detail {
+    padding: 20px;
+  }
+
+  .detail-header {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .detail-poster {
+    width: 80%;
+  }
+
+  .detail-info h1 {
+    text-align: center;
+  }
+
+  .trailer-wrapper iframe {
+    height: 220px;
+  }
 }

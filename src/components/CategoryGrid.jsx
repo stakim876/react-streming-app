@@ -1,14 +1,13 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchMovies } from "@/services/tmdb";
+import { fetchMovies } from "@/api/tmdb";
 import MovieCard from "@/components/MovieCard";
-import "@/styles/CategoryGrid.css";
+import "./CategoryGrid.css";
 
 export default function CategoryGrid({ title, category, type, genreId }) {
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(true);
   const rowRef = useRef(null);
 
-  // ✅ 안전 콘텐츠 필터 함수 (한글 + 영문 확장)
   function isSafeContent(item) {
     const text = `${item.title || ""} ${item.original_title || ""} ${
       item.overview || ""
@@ -16,15 +15,12 @@ export default function CategoryGrid({ title, category, type, genreId }) {
 
     return (
       !item.adult &&
-      item.poster_path && // 포스터 없는 영화 제외
+      item.poster_path && 
       ![
-        // ⚠️ 영어 키워드
         "porn", "pornographic", "erotic", "fetish", "hardcore",
         "sex", "sexual", "nude", "naked", "xvideo", "xhamster",
         "zwinger", "escort", "adult video", "strip", "lust",
-        // ⚠️ 한국어 키워드
         "야동", "야사", "에로", "성인", "노출", "19금", "음란", "포르노", "섹스", "불륜",
-        // ⚠️ 일본어 키워드
         "エロ", "レイプ", "アダルト", "爆乳", "セックス",
       ].some((kw) => text.includes(kw))
     );
@@ -46,7 +42,6 @@ export default function CategoryGrid({ title, category, type, genreId }) {
         setLoading(true);
         const res = await fetchMovies(url);
 
-        // ✅ 강화된 필터 적용
         const filtered = (res.results || []).filter(isSafeContent);
 
         setMovies(filtered.slice(0, 20));

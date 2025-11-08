@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from "react";
-import { fetchMovies, fetchMovieDetail } from "@/services/tmdb";
+import { fetchMovies, fetchMovieDetail } from "@/api/tmdb";
 import { FaPowerOff } from "react-icons/fa";
 import "./FeaturedHero.css";
 
