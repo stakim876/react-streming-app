@@ -60,7 +60,6 @@ export default function CategoryCards() {
             onClick={() => handleClick(cat)}
           >
             <img src={cat.image} alt={cat.name} />
-           {/* <div className="card-title">{cat.name}</div> */}
           </div>
         ))}
       </div>

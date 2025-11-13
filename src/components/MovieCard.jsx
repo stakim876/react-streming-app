@@ -16,7 +16,13 @@ export default function MovieCard({ movie }) {
   return (
     <div
       className="movie-card"
-      onClick={() => navigate(`/${mediaType}/${movie.id}`)}
+      onClick={(e) => {
+  e.stopPropagation();
+  e.preventDefault();
+  alert("✅ 클릭됨!");
+  console.log("navigate to", `/${mediaType}/${movie.id}`);
+  navigate(`/${mediaType}/${movie.id}`);
+}}
     >
       <img
         src={imageUrl}

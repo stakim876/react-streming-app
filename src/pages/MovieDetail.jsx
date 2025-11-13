@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, useNavigate } from "react-router-dom";   
 import LikeButton from "@/components/LikeButton";
 import TMDBImage from "@/components/TMDBImage"; 
 import "./MovieDetail.css";
@@ -7,6 +7,8 @@ import CommentsSection from "@/components/CommentsSection.jsx";
 
 export default function MovieDetail() {
   const { id } = useParams();
+  const navigate = useNavigate();  
+
   const [movie, setMovie] = useState(null);
   const [cast, setCast] = useState([]);
   const [trailer, setTrailer] = useState(null);
@@ -24,9 +26,9 @@ export default function MovieDetail() {
         const data = await res.json();
 
         const blockKeywords = [
-          "porn", "pornographic", "xvideo", "xhamster", "zwinger", "fetish", "hardcore",
-          "nude", "erotic", "explicit sex", "adult video", "pornstar",
-          "야동", "에로", "성인", "음란", "포르노", "19금", "노골적",
+          "porn","pornographic","xvideo","xhamster","zwinger","fetish","hardcore",
+          "nude","erotic","explicit sex","adult video","pornstar",
+          "야동","에로","성인","음란","포르노","19금","노골적",
         ];
         const text = `${data.title || ""} ${data.overview || ""}`.toLowerCase();
         if (data.adult || blockKeywords.some((kw) => text.includes(kw))) {
@@ -150,7 +152,12 @@ export default function MovieDetail() {
           <h2>추천작</h2>
           <div className="recommend-list">
             {recommend.map((r) => (
-              <div key={r.id} className="recommend-card">
+              <div
+                key={r.id}
+                className="recommend-card"
+                onClick={() => navigate(`/movie/${r.id}`)}   
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={
                     r.poster_path
@@ -171,7 +178,12 @@ export default function MovieDetail() {
           <h2>이 영화와 비슷한 콘텐츠</h2>
           <div className="similar-list">
             {similar.map((s) => (
-              <div key={s.id} className="similar-card">
+              <div
+                key={s.id}
+                className="similar-card"
+                onClick={() => navigate(`/movie/${s.id}`)}   
+                style={{ cursor: "pointer" }}
+              >
                 <img
                   src={
                     s.poster_path

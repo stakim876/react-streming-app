@@ -34,6 +34,8 @@
   background: linear-gradient(transparent, rgba(0, 0, 0, 0.85));
   color: #fff;
   font-size: 0.85rem;
+
+  pointer-events: none;
 }
 
 .movie-title {

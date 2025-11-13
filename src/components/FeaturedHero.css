@@ -7,6 +7,9 @@
   display: flex;
   justify-content: center;
   align-items: center;
+
+  pointer-events: none !important;
+  z-index: 0 !important;
 }
 
 .hero-video-wrapper {
@@ -17,7 +20,9 @@
   height: 100vh;
   transform: translate(-50%, -50%);
   overflow: hidden;
-  z-index: 1;
+
+  pointer-events: none !important;
+  z-index: 0 !important;
 }
 
 .hero-video {
@@ -29,14 +34,17 @@
   transform: translate(-50%, -50%);
   object-fit: cover;
   border: none;
-  pointer-events: none;
+
+  pointer-events: none !important;
+  z-index: 0 !important;
 }
 
 .play-btn {
   position: absolute;
   bottom: 8%;
   left: 5%;
-  z-index: 2;
+  z-index: 5 !important;
+
   background-color: rgba(255, 255, 255, 0.9);
   color: #000;
   border: none;
@@ -46,6 +54,8 @@
   border-radius: 10px;
   cursor: pointer;
   transition: all 0.3s ease;
+
+  pointer-events: auto !important;
 }
 
 .play-btn:hover {
@@ -57,7 +67,8 @@
   position: absolute;
   top: 1rem;
   right: 1rem;
-  z-index: 3;
+  z-index: 6 !important;
+
   background: rgba(0, 0, 0, 0.5);
   border: none;
   color: #8fffe3;
@@ -66,6 +77,8 @@
   cursor: pointer;
   border-radius: 6px;
   transition: background 0.3s;
+
+  pointer-events: auto !important;
 }
 
 .hero-toggle-btn:hover {
