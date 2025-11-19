@@ -1,4 +1,4 @@
-import { db } from "@/lib/firebase";
+import { db } from "@/services/firebase";
 import { doc, setDoc, getDoc } from "firebase/firestore";
 
 export async function toggleLike(userId, movie) {

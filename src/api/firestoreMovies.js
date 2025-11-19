@@ -1,8 +1,16 @@
-import { db } from "@/lib/firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { db } from "@/services/firebase";
+import { collection, getDocs, query, where } from "firebase/firestore";
 
 export async function getMoviesFromFirestore(category) {
-  const colRef = collection(db, `movies_${category}`);
-  const snap = await getDocs(colRef);
-  return snap.docs.map((doc) => doc.data());
+  const q = query(
+    collection(db, "movies"),
+    where("category", "==", category)
+  );
+
+  const snap = await getDocs(q);
+
+  return snap.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  }));
 }

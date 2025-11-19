@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { fetchMovies } from "@/api/tmdb";
-import MovieCard from "@/components/MovieCard";
+import MovieCard from "@/components/cards/MovieCard";
 import "./CategoryGrid.css";
 
 export default function CategoryGrid({ title, category, type, genreId }) {

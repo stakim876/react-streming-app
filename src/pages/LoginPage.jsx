@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
 import { signInWithEmailAndPassword } from "firebase/auth";
-import { auth } from "@/lib/firebase";
+import { auth } from "@/services/firebase";  
 import "./LoginPage.css";
 
 export default function LoginPage() {
@@ -27,8 +27,10 @@ export default function LoginPage() {
     <div className="login-container">
       <div className="login-box">
         <h1 className="login-title">로그인</h1>
+
         <form onSubmit={handleLogin}>
           {error && <p className="error">{error}</p>}
+
           <input
             type="email"
             placeholder="이메일"
@@ -36,6 +38,7 @@ export default function LoginPage() {
             onChange={(e) => setEmail(e.target.value)}
             required
           />
+
           <input
             type="password"
             placeholder="비밀번호"
@@ -43,13 +46,14 @@ export default function LoginPage() {
             onChange={(e) => setPassword(e.target.value)}
             required
           />
+
           <button type="submit" className="login-btn">
             로그인
           </button>
         </form>
+
         <p className="signup-link">
-          계정이 없으신가요?{" "}
-          <Link to="/signup">회원가입</Link>
+          계정이 없으신가요? <Link to="/signup">회원가입</Link>
         </p>
       </div>
     </div>

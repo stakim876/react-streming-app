@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { fetchMovies } from "../api/tmdb";
-import MovieCard from "@/components/MovieCard";
+import MovieCard from "@/components/cards/MovieCard";
 import "./CategoryPage.css";
 
 export default function CategoryPage() {

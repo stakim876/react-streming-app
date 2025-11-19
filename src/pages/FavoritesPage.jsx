@@ -1,6 +1,6 @@
 import { useAuth } from "@/context/AuthContext";
 import { useFavorites } from "@/context/FavoritesContext";
-import MovieCard from "@/components/MovieCard";
+import MovieCard from "@/components/cards/MovieCard";
 import "./FavoritesPage.css";
 
 export default function FavoritesPage() {

@@ -1,9 +1,9 @@
 import "./HomePage.css";
 import FeaturedHero from "@/components/FeaturedHero";
 import CategoryGrid from "@/components/CategoryGrid";
-import CategoryCards from "@/components/CategoryCards";
+import CategoryCards from "@/components/cards/CategoryCards";
+
 import TodayTop10 from "@/components/TodayTop10";
-import "./LoginPage.css"; 
 import TodayRecommend from "@/components/TodayRecommend";
 import WatchAgain from "@/components/WatchAgain";
 

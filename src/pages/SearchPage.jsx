@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import MovieCard from "@/components/MovieCard";
+import MovieCard from "@/components/cards/MovieCard";
 
 export default function SearchPage() {
   const [query, setQuery] = useState("");

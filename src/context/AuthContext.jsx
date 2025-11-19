@@ -1,5 +1,6 @@
 import { createContext, useContext, useEffect, useState } from "react";
-import { auth } from "@/lib/firebase";
+import { auth } from "@/services/firebase";  
+
 import {
   signInWithEmailAndPassword,
   createUserWithEmailAndPassword,
@@ -18,11 +19,14 @@ export function AuthProvider({ children }) {
       setUser(currentUser);
       setLoading(false);
     });
+
     return unsubscribe;
   }, []);
+
   const login = (email, password) => {
     return signInWithEmailAndPassword(auth, email, password);
   };
+
   const signup = (email, password) => {
     return createUserWithEmailAndPassword(auth, email, password);
   };
